@@ -31,12 +31,24 @@ export function getAll({
 	limit = '5', page='1'}) {
 	const args = {...arguments}
 	const search = args[0]?.search
+	const sort = args[0]?.sort
 
 	try{
 		const file = fs.readFileSync("./models/users.json", 'utf-8')
 		const formated = JSON.parse(file)
 		if (search){
 			return formated.filter((item) => item.name === search.name)
+		}
+		if(sort){
+			switch(sort){
+				case 'name':
+					formated.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
+					break;
+				case 'email':
+					formated.sort((a, b) => a.email.toLowerCase().localeCompare(b.email.toLowerCase()))
+					break;
+				default:
+			}
 		}
 		return formated.slice((parseInt(page)*parseInt(limit)) - parseInt(limit), parseInt(limit)*parseInt(page))
 	}catch(err){
