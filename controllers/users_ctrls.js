@@ -9,7 +9,7 @@ import { getAll, getDetail, delUser, putUser } from "../models/users_models.js"
 
 export function getAvailUsers(req, res){
     const results = getAll()
-    res.status(constants.HTTP_STATUS_ACCEPTED).json({
+    res.status(constants.HTTP_STATUS_OK).json({
         success:true,
         message:"Success Get All Users",
         results: results
@@ -19,7 +19,7 @@ export function getAvailUsers(req, res){
 export function getUserById(req, res){
     const id = req.params.id
     const results = getDetail(id)
-    res.status(constants.HTTP_STATUS_ACCEPTED).json({
+    res.status(constants.HTTP_STATUS_OK).json({
         success:true,
         message:"Success Get Detail",
         results: results
@@ -46,7 +46,7 @@ export function updateUser(req, res){
     })
     res.status(constants.HTTP_STATUS_OK).json({
         success: true,
-        message:"Sucsses Update User",
+        message:"Success Update User",
         results:result
     })
 }
