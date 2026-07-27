@@ -30,9 +30,15 @@ export function create(data) {
 
 export function getAll({
 	limit = '5', page='1'}) {
+	const args = {...arguments}
+	const search = args[0]?.search
+
 	try{
 		const file = fs.readFileSync("./models/users.json", 'utf-8')
 		const formated = JSON.parse(file)
+		if (search){
+			return formated.filter((item) => item.name === search.name)
+		}
 		return formated.slice((parseInt(page)*parseInt(limit)) - parseInt(limit), parseInt(limit)*parseInt(page))
 	}catch(err){
 		console.error(err.message)

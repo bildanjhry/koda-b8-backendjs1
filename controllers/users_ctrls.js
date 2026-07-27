@@ -1,4 +1,7 @@
 import { constants } from "http2"
+import qs from "qs"
+
+
 import { getAll, getDetail, delUser, putUser } from "../models/users_models.js"
 
 /**
@@ -9,8 +12,9 @@ import { getAll, getDetail, delUser, putUser } from "../models/users_models.js"
 
 export function getAvailUsers(req, res){
     const queryParams = req.query
-    console.log(queryParams)
-    const results = getAll(queryParams)
+    const objQuery = qs.parse(req.query)
+
+    const results = getAll(objQuery)
     if (results.length < 1){
             res.status(constants.HTTP_STATUS_OK).json({
             success:true,
