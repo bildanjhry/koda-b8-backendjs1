@@ -1,11 +1,16 @@
 let users = []
 
 export function create(data){
+    const res = users.filter((item) => item.email === data.email)
+    if(res.length > 0){
+        return false
+    }
     users = [...users, 
         {
         id:users.length+1,
         ...data,
     }]
+    return true
 }
 
 export function getAll(){
