@@ -28,12 +28,12 @@ export function create(data) {
 	return true
 }
 
-export function getAll() {
-
+export function getAll({
+	limit = '5', page='1'}) {
 	try{
 		const file = fs.readFileSync("./models/users.json", 'utf-8')
 		const formated = JSON.parse(file)
-		return formated
+		return formated.slice((parseInt(page)*parseInt(limit)) - parseInt(limit), parseInt(limit)*parseInt(page))
 	}catch(err){
 		console.error(err.message)
 		return []

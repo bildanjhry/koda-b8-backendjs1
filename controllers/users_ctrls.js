@@ -8,7 +8,9 @@ import { getAll, getDetail, delUser, putUser } from "../models/users_models.js"
  */
 
 export function getAvailUsers(req, res){
-    const results = getAll()
+    const queryParams = req.query
+    console.log(queryParams)
+    const results = getAll(queryParams)
     if (results.length < 1){
             res.status(constants.HTTP_STATUS_OK).json({
             success:true,
