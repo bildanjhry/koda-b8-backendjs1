@@ -49,10 +49,10 @@ export function getDetail(id) {
 		const file = fs.readFileSync("./models/users.json", 'utf-8')
 		const formated = JSON.parse(file)
 		const res = formated.filter((item) => item.id === parseInt(id))
-		return res
+		return {succes:true, result:res}
 	} catch(err){
 		console.log(err.message)
-		return []
+		return {succes:false, message:err.message}
 	}
 }
 
@@ -94,7 +94,7 @@ export function putUser(id, data) {
 		})
 		fs.writeFileSync("./models/users.json", JSON.stringify(newUsers))
 		const res = getDetail(id)
-		return{succes:true, result:res[0]}
+		return{succes:true, result:res}
 
 	} catch(err){
 		console.error(err.message)
