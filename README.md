@@ -13,3 +13,13 @@ Program CRUD data users menggunakan framework Express js
 - Update data users
 - Delete data user
 - Get user detail
+
+## API Endpoints
+
+| Method | Endpoint | 
+|--------|----------|
+| GET | /users |
+| GET | /users/:id |
+| POST | /register |
+| PUT | /users/:id |
+| DELETE | /users/:id |
