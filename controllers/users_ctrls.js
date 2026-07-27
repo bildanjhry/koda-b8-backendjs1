@@ -36,6 +36,12 @@ export function getUserById(req, res){
 export function deleteUser(req, res){
     const id = req.params.id
     const result = delUser(id)
+    if (!result.succes){
+        res.status(constants.HTTP_STATUS_BAD_REQUEST).json({
+            succes:result.succes,
+            message:result.message
+        })
+    }
     res.status(constants.HTTP_STATUS_OK).json({
         success:true,
         message: "Success Delete Users",

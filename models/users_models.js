@@ -5,7 +5,6 @@ let users = []
 export function create(data) {
 
 	try {
-
 		let formated = []
 
 		if(fs.existsSync("./models/users.json")){
@@ -58,14 +57,45 @@ export function getDetail(id) {
 }
 
 export function delUser(id) {
-	users = users.filter((item) => item.id !== parseInt(id))
+	try {
+		if(!fs.existsSync("./models/users.json")){
+			throw new Error("Users are empty")
+		}
+		const file = fs.readFileSync("./models/users.json", 'utf-8')
+		const formated = JSON.parse(file)
+		let newFile = formated.filter((item) => item.id !== parseInt(id))
+		if(newFile.length === formated.length){
+			throw new Error("No user matches")
+		}
+		fs.writeFileSync("./models/users.json", JSON.stringify(newFile))
+
+		return {succes: true, message:""}
+	} catch(err){
+		console.error(err.message)
+		return {succes: false, message:err.message}
+	}
 }
 
+
+
 export function putUser(id, data) {
-	users.splice(parseInt(id) - 1, 1, {
-		id: parseInt(id),
-		...data
-	})
-	const res = getDetail(id)
-	return res
+	try{
+		if(!fs.existsSync("./models/users.json")){
+			throw new Error("Users are emtpy")
+		}
+		const file = fs.readSync("./models/users.json", 'utf-8')
+		const formated = JSON.parse(file)
+		const newUsers = formated
+		newUsers.splice(parseInt(id) - 1, 1, {
+			id: parseInt(id),
+			...data
+		})
+		fs.writeFileSync("./models/users.json", JSON.stringify(newUsers))
+		const res = getDetail(id)
+		return res
+
+	} catch(err){
+		console.error(err.message)
+		return{succes:false, message:err.message, result:[]}
+	}
 }
