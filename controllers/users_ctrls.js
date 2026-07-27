@@ -9,6 +9,13 @@ import { getAll, getDetail, delUser, putUser } from "../models/users_models.js"
 
 export function getAvailUsers(req, res){
     const results = getAll()
+    if (results.length < 1){
+            res.status(constants.HTTP_STATUS_OK).json({
+            success:true,
+            message:"Users are empty",
+        })
+        return
+    }
     res.status(constants.HTTP_STATUS_OK).json({
         success:true,
         message:"Success Get All Users",
@@ -37,7 +44,6 @@ export function deleteUser(req, res){
 
 export function updateUser(req, res){
     const id = req.params.id
-    console.log(id)
     const {name, email, password} = req.body
     const result = putUser(id, {
         name:name,
