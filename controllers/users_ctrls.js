@@ -1,6 +1,6 @@
 import { constants } from "http2"
 import express from "express"
-import { getAll, getDetail } from "../models/users_modes.js"
+import { getAll, getDetail, delUser, putUser } from "../models/users_modes.js"
 
 /**
  * 
@@ -29,10 +29,25 @@ export function getUserById(req, res){
 
 export function deleteUser(req, res){
     const id = req.params.id
-    console.log(req.params)
-    const result = deleteUser(id)
-    res.status(HTT_STATUS_OK).json({
+    const result = delUser(id)
+    res.status(constants.HTTP_STATUS_OK).json({
         success:true,
         message: "Success Delete Users",
+    })
+}
+
+export function updateUser(req, res){
+    const id = req.params.id
+    console.log(id)
+    const {name, email, password} = req.body
+    const result = putUser(id, {
+        name:name,
+        email:email,
+        password:password
+    })
+    res.status(constants.HTTP_STATUS_OK).json({
+        success: true,
+        message:"Sucsses Update User",
+        results:result
     })
 }
