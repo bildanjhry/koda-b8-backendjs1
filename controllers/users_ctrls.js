@@ -1,6 +1,5 @@
 import { constants } from "http2"
-import express from "express"
-import { getAll, getDetail, delUser, putUser } from "../models/users_modes.js"
+import { getAll, getDetail, delUser, putUser } from "../models/users_models.js"
 
 /**
  * 
