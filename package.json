@@ -1,0 +1,28 @@
+{
+  "name": "auth",
+  "version": "1.0.0",
+  "description": "Simple CRUD BE application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bildanjhry/koda-b8-backendjs1.git"
+  },
+  "keywords": [],
+  "author": "space_ranger",
+  "type": "module",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bildanjhry/koda-b8-backendjs1/issues"
+  },
+  "homepage": "https://github.com/bildanjhry/koda-b8-backendjs1#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6"
+  }
+}
