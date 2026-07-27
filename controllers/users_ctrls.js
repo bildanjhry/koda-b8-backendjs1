@@ -31,6 +31,7 @@ export function getUserById(req, res){
             succes:true,
             message:"User not found"
         })
+        return
     }
     res.status(constants.HTTP_STATUS_OK).json({
         success:true,
