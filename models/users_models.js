@@ -76,23 +76,25 @@ export function delUser(id) {
 	}
 }
 
-
-
 export function putUser(id, data) {
 	try{
 		if(!fs.existsSync("./models/users.json")){
-			throw new Error("Users are emtpy")
+			throw new Error("Users are empty")
 		}
-		const file = fs.readSync("./models/users.json", 'utf-8')
+		const file = fs.readFileSync("./models/users.json", 'utf-8')
 		const formated = JSON.parse(file)
 		const newUsers = formated
+		let dataUser = newUsers.filter((item) => item.id !== parseInt(id))
+		if(dataUser.length === formated.length){
+			throw new Error("No user matches")
+		}
 		newUsers.splice(parseInt(id) - 1, 1, {
 			id: parseInt(id),
 			...data
 		})
 		fs.writeFileSync("./models/users.json", JSON.stringify(newUsers))
 		const res = getDetail(id)
-		return res
+		return{succes:true, result:res[0]}
 
 	} catch(err){
 		console.error(err.message)

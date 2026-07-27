@@ -26,6 +26,12 @@ export function getAvailUsers(req, res){
 export function getUserById(req, res){
     const id = req.params.id
     const results = getDetail(id)
+    if(results.length < 1){
+        res.status(constants.HTTP_STATUS_OK).json({
+            succes:true,
+            message:"User not found"
+        })
+    }
     res.status(constants.HTTP_STATUS_OK).json({
         success:true,
         message:"Success Get Detail",
@@ -56,9 +62,17 @@ export function updateUser(req, res){
         email:email,
         password:password
     })
+    if(!result.succes){
+        res.status(constants.HTTP_STATUS_BAD_REQUEST).json({
+            success: false,
+            message:result.message,
+        })
+        return
+    }
+
     res.status(constants.HTTP_STATUS_OK).json({
         success: true,
         message:"Success Update User",
-        results:result
+        results:result.result
     })
 }
