@@ -3,10 +3,10 @@ POST /auth/register
 Host: localhost:8080
 Content-Type: application/x-www-form-urlencoded
 
-name=bildan&email=2bildan@mail.com&password=1234
+name=test90s1&email=1sdgnsdg@mail.com&password=1234
 
 ### Get All Users
-GET /users
+GET /users?page=1
 Host: localhost:8080
 
 ### Get User Detail

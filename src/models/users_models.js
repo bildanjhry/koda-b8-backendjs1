@@ -5,8 +5,8 @@ export function create(data) {
 	try {
 		let formated = []
 
-		if(fs.existsSync("./models/users.json")){
-			const file = fs.readFileSync("./models/users.json", 'utf-8')
+		if(fs.existsSync("./src/models/users.json")){
+			const file = fs.readFileSync("./src/models/users.json", 'utf-8')
 		  formated = JSON.parse(file)
 			if (formated.find((item) => item.email === data.email)) {
 				throw new Error("Email already being used")
@@ -18,7 +18,7 @@ export function create(data) {
 			id: formated.length + 1,
 			...data,
 		}]
-		fs.writeFileSync("./models/users.json", JSON.stringify(users))
+		fs.writeFileSync("./src/models/users.json", JSON.stringify(users))
 	} catch (err) {
 		console.error(err.message)
 		return false
@@ -34,7 +34,7 @@ export function getAll({
 	const sort = args[0]?.sort
 
 	try{
-		const file = fs.readFileSync("./models/users.json", 'utf-8')
+		const file = fs.readFileSync("./src/models/users.json", 'utf-8')
 		const formated = JSON.parse(file)
 		if (search){
 			return formated.filter((item) => item.name === search.name)
@@ -60,10 +60,10 @@ export function getAll({
 export function getDetail(id) {
 
 	try{
-		if(!fs.existsSync("./models/users.json")){
+		if(!fs.existsSync("./src/models/users.json")){
 			throw new Error("Users are empty")
 		}
-		const file = fs.readFileSync("./models/users.json", 'utf-8')
+		const file = fs.readFileSync("./src/models/users.json", 'utf-8')
 		const formated = JSON.parse(file)
 		const res = formated.filter((item) => item.id === parseInt(id))
 		return {succes:true, result:res}
@@ -75,16 +75,16 @@ export function getDetail(id) {
 
 export function delUser(id) {
 	try {
-		if(!fs.existsSync("./models/users.json")){
+		if(!fs.existsSync("./src/models/users.json")){
 			throw new Error("Users are empty")
 		}
-		const file = fs.readFileSync("./models/users.json", 'utf-8')
+		const file = fs.readFileSync("./src/models/users.json", 'utf-8')
 		const formated = JSON.parse(file)
 		let newFile = formated.filter((item) => item.id !== parseInt(id))
 		if(newFile.length === formated.length){
 			throw new Error("No user matches")
 		}
-		fs.writeFileSync("./models/users.json", JSON.stringify(newFile))
+		fs.writeFileSync("./src/models/users.json", JSON.stringify(newFile))
 
 		return {succes: true, message:""}
 	} catch(err){
@@ -95,10 +95,10 @@ export function delUser(id) {
 
 export function putUser(id, data) {
 	try{
-		if(!fs.existsSync("./models/users.json")){
+		if(!fs.existsSync("./src/models/users.json")){
 			throw new Error("Users are empty")
 		}
-		const file = fs.readFileSync("./models/users.json", 'utf-8')
+		const file = fs.readFileSync("./src/models/users.json", 'utf-8')
 		const formated = JSON.parse(file)
 		const newUsers = formated
 		let dataUser = newUsers.filter((item) => item.id !== parseInt(id))
@@ -109,7 +109,7 @@ export function putUser(id, data) {
 			id: parseInt(id),
 			...data
 		})
-		fs.writeFileSync("./models/users.json", JSON.stringify(newUsers))
+		fs.writeFileSync("./src/models/users.json", JSON.stringify(newUsers))
 		const res = getDetail(id)
 		return{succes:true, result:res}
 
