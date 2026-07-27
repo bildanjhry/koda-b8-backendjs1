@@ -1,7 +1,5 @@
 import fs from "node:fs"
 
-let users = []
-
 export function create(data) {
 
 	try {
@@ -14,6 +12,7 @@ export function create(data) {
 				throw new Error("Email already being used")
 			}
 		}
+		let users = []
 		users = [...formated,
 		{
 			id: formated.length + 1,

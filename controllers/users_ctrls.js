@@ -1,7 +1,5 @@
 import { constants } from "http2"
 import qs from "qs"
-
-
 import { getAll, getDetail, delUser, putUser } from "../models/users_models.js"
 
 /**
