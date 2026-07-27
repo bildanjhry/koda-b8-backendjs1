@@ -1,5 +1,6 @@
 Minitask
 koda-b8-backendjs1
 Membuat CRUD /users
+Pagination, limit dan search
 GET list, GET details, POST, PATCH, DELETE
 Source data: dari sebuah variable yang disimpan didalam models.
