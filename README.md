@@ -8,6 +8,7 @@ Program CRUD data users menggunakan framework Express js
 - Get all data users
 - Pagination
 - Search users
+- Sorting
 - Create data user
 - Update data users
 - Delete data user
