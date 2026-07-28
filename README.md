@@ -11,10 +11,11 @@ Program CRUD data users menggunakan framework Express js
 - Sorting
 - Create data user
 - Update data users
+- Upload profile picture
 - Delete data user
 - Get user detail
 
-## API Endpoints
+### API Endpoints
 
 | Method | Endpoint | 
 |--------|----------|
@@ -22,4 +23,8 @@ Program CRUD data users menggunakan framework Express js
 | GET | /users/:id |
 | POST | /register |
 | PUT | /users/:id |
+| PUT | /users/:id/upload |
 | DELETE | /users/:id |
+
+### Preview:
+![alt text](image.png)
