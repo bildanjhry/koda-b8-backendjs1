@@ -118,3 +118,32 @@ export function putUser(id, data) {
 		return{succes:false, message:err.message, result:[]}
 	}
 }
+
+export function uploadPic(id, data){
+	
+	try{
+		if(!fs.existsSync("./src/models/users.json")){
+			throw new Error("Users are empty")
+		}
+		const file = fs.readFileSync("./src/models/users.json", 'utf-8')
+		const formated = JSON.parse(file)
+		const newUsers = formated
+		let dataUser = newUsers.filter((item) => item.id !== parseInt(id))
+		let choosen = newUsers.filter((item) => item.id === parseInt(id))
+		if(dataUser.length === formated.length || choosen.length < 1){
+			throw new Error("No user matches")
+		}
+		newUsers.splice(parseInt(id) - 1, 1, {
+			id: parseInt(id),
+			...choosen[0],
+			picture:data.path
+		})
+		fs.writeFileSync("./src/models/users.json", JSON.stringify(newUsers))
+		const res = getDetail(id)
+		return{succes:true, result:res}
+
+	} catch(err){
+		console.error(err.message)
+		return{succes:false, message:err.message, result:[]}
+	}
+}

@@ -1,6 +1,6 @@
 import { constants } from "http2"
 import qs from "qs"
-import { getAll, getDetail, delUser, putUser } from "../models/users_models.js"
+import { getAll, getDetail, delUser, putUser, uploadPic } from "../models/users_models.js"
 
 /**
  * 
@@ -52,6 +52,7 @@ export function deleteUser(req, res){
             succes:result.succes,
             message:result.message
         })
+        return
     }
     res.status(constants.HTTP_STATUS_OK).json({
         success:true,
@@ -79,5 +80,22 @@ export function updateUser(req, res){
         success: true,
         message:"Success Update User",
         results:result.result.result
+    })
+}
+
+export function updload(req, res){
+    const id = req.params.id
+    const response = uploadPic(id, req.file) 
+    if (!response.succes){
+        res.status(constants.HTTP_STATUS_BAD_REQUEST).json({
+            success:false,
+            message:res.message,
+        })
+        return
+    }
+    res.status(constants.HTTP_STATUS_CREATED).json({
+        success:true,
+        message:"Success Upload Image",
+        results: response.result
     })
 }

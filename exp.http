@@ -6,7 +6,7 @@ Content-Type: application/x-www-form-urlencoded
 name=test90s1&email=1sdgnsdg@mail.com&password=1234
 
 ### Get All Users
-GET /users?page=1
+GET /users?page=2
 Host: localhost:8080
 
 ### Get User Detail
