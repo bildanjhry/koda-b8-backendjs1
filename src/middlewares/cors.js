@@ -13,6 +13,7 @@ export default function corsMiddleware(req, res, next) {
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization")
     if (req.method === "OPTIONS"){
         res.sendStatus(constants.HTTP_STATUS_NO_CONTENT)
+        return
     }
     next()
 }

@@ -4,7 +4,8 @@ import { FaRegEdit } from "react-icons/fa";
 import { VscVerifiedFilled } from "react-icons/vsc";
 
 export default function App() {
-  const [data, setData] = useState()
+  const [data, setData] = useState([])
+  const [trigger, setTrigger] = useState(false)
 
   useEffect(() => {
     fetch('http://localhost:8080/users', {
@@ -12,8 +13,7 @@ export default function App() {
         "Authorization": "Allow"
       },
     }).then(res => res.json()).then(data => setData(data.results)).catch(err => console.error(err.message))
-  }, [])
-
+  }, [setTrigger, trigger])
 
   function handleUpload(e, id) {
     const file = e.target.files[0]
@@ -26,14 +26,9 @@ export default function App() {
       },
       body: data
     }).then(res => res.json()).then(data => {
-      console.log(data)
-      // if (data.success) {
-      //   fetch('http://localhost:8080/users', {
-      //     headers: {
-      //       "Authorization": "Allow"
-      //     },
-      //   }).then(res => res.json()).then(data => setData(data.results)).catch(err => console.error(err.message))
-      // }
+      if (data.success) {
+        setTrigger(true)
+      }
     })
   }
 

@@ -140,10 +140,10 @@ export function uploadPic(id, data){
 		})
 		fs.writeFileSync("./src/models/users.json", JSON.stringify(newUsers))
 		const res = getDetail(id)
-		return{succes:true, result:res}
+		return{success:true, result:res}
 
 	} catch(err){
 		console.error(err.message)
-		return{succes:false, message:err.message, result:[]}
+		return{success:false, message:err.message, result:[]}
 	}
 }

@@ -86,16 +86,16 @@ export function updateUser(req, res){
 export function updload(req, res){
     const id = req.params.id
     const response = uploadPic(id, req.file) 
-    if (!response.succes){
+    if (!response.success){
         res.status(constants.HTTP_STATUS_BAD_REQUEST).json({
             success:false,
-            message:res.message,
+            message:response.message,
         })
         return
     }
     res.status(constants.HTTP_STATUS_CREATED).json({
         success:true,
         message:"Success Upload Image",
-        results: response.result
+        results: response.result.result
     })
 }
